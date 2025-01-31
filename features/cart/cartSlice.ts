@@ -30,28 +30,26 @@ const cartSlice = createSlice({
       state.total += item?.price
     },
 
-    incrementQuantity: (state, action: PayloadAction<CartItem>) => {
-      const item = state.items.find((item) => item.id === action.payload.id)
+    incrementQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((item) => item.id === action.payload)
       if (item) {
         item.quantity += 1
         state.total += item.price
       }
     },
 
-    decrementQuantity: (state, action: PayloadAction<CartItem>) => {
-      const item = state.items.find((item) => item.id === action.payload.id)
+    decrementQuantity: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((item) => item.id === action.payload)
       if (item && item.quantity > 1) {
         item.quantity -= 1
       }
       state.total -= item?.price
     },
 
-    removeFromCart: (state, action: PayloadAction<CartItem>) => {
-      const item = state.items.find((item) => item.id === action.payload.id)
+    removeFromCart: (state, action: PayloadAction<number>) => {
+      const item = state.items.find((item) => item.id === action.payload)
       if (item) {
-        state.items = state.items.filter(
-          (item) => item.id !== action.payload.id
-        )
+        state.items = state.items.filter((item) => item.id !== action.payload)
         state.total = state.total - item.price * item.quantity
       }
     },
